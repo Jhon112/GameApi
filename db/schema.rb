@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_04_225308) do
+ActiveRecord::Schema.define(version: 2020_03_06_040237) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "levels", force: :cascade do |t|
     t.string "name", null: false
@@ -18,12 +21,12 @@ ActiveRecord::Schema.define(version: 2020_03_04_225308) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "score", id: false, force: :cascade do |t|
-    t.integer "level_id", null: false
-    t.integer "user_id", null: false
-    t.integer "score", null: false
-    t.index ["level_id"], name: "index_score_on_level_id"
-    t.index ["user_id"], name: "index_score_on_user_id"
+  create_table "scores", id: false, force: :cascade do |t|
+    t.bigint "level_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "total_score", null: false
+    t.index ["level_id"], name: "index_scores_on_level_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
